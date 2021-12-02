@@ -3,6 +3,11 @@ import {fadeOut} from "./fadeInFadeOut.js";
 
 export const tabHandler = () => {
     const tabs = document.querySelectorAll('.tabs li a');
+    const tabsContent= [... document.getElementById('content').querySelectorAll('p')];
+
+    tabsContent.slice(1).forEach(elem => {
+        fadeOut(elem, 0)
+    });
     tabs.forEach(tab => {
         tab.addEventListener('click', function () {
             let content = tab.hash.replace('#/', '');
@@ -10,11 +15,11 @@ export const tabHandler = () => {
                 tab.classList.remove('active');
             });
             tab.classList.add('active');
-            document.getElementById('content').querySelectorAll('p').forEach(elem => {
-                fadeOut(elem, 200)
+            tabsContent.forEach(elem => {
+                fadeOut(elem, 200);
             })
             setTimeout(() => {
-                fadeIn(document.getElementById(content), 200)
+                fadeIn(document.getElementById(content), 200);
             }, 202);
         });
     });
